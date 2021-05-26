@@ -21,7 +21,7 @@ async fn main() -> std::io::Result<()> {
         counter: Mutex::new(0),
     });
     let app = HttpServer::new(move || App::new().app_data(counter.clone()).service(index))
-        .bind(config.get_app_url())?;
-    println!("Listening on: {}", config.get_app_url());
+        .bind(config.app_url())?;
+    println!("Listening on: {}", config.app_url());
     app.run().await
 }

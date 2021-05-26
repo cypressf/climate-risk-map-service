@@ -6,6 +6,6 @@ version = "0.1.0"
 
 [dependencies]
 actix-web = "3"
-dotenv = {version = "0.14"}
+dotenv = "0.14"
 refinery = {version = "0.5", features = ["mysql"]}
 sqlx = {version = "0.5", features = ["mysql", "runtime-async-std-native-tls"]}
