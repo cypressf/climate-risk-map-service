@@ -6,7 +6,7 @@ Install MySQL and set up a user with privileges to create and edit a database. D
 
 ```
 CREATE USER 'mit'@'localhost' IDENTIFIED BY '<password>';
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON `climate_risk_map`.* TO 'mit'@'localhost'
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES ON `climate_risk_map`.* TO 'mit'@'localhost';
 ```
 
 Copy `.env.template` to `.env` and replace values with your own, or set them as environment variables. Environment variables overwrite anything in the `.env` file. The `.env` file is an optional convenience mostly for dev builds.
