@@ -13,4 +13,10 @@ impl<'c> Table<'c, State> {
         .fetch_one(&*self.pool)
         .await
     }
+
+    pub async fn all(&self) -> Result<Vec<State>, sqlx::Error> {
+        sqlx::query_as("SELECT id, name FROM state")
+            .fetch_all(&*self.pool)
+            .await
+    }
 }
