@@ -8,4 +8,10 @@ impl<'c> Table<'c, County> {
             .fetch_all(&*self.pool)
             .await
     }
+
+    pub async fn all(&self) -> Result<Vec<County>, sqlx::Error> {
+        sqlx::query_as("SELECT id, name, state FROM county")
+            .fetch_all(&*self.pool)
+            .await
+    }
 }
