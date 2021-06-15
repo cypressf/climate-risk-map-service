@@ -18,6 +18,7 @@ async fn main() -> std::io::Result<()> {
             .configure(controller::state_controller::init)
             .configure(controller::county_controller::init)
             .configure(controller::data_controller::init)
+            .configure(controller::dataset_controller::init)
     })
     .bind(config.app_url())?;
     println!("Listening on: {}", config.app_url());
