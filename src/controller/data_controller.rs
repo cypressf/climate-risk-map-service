@@ -5,14 +5,14 @@ pub fn init(cfg: &mut web::ServiceConfig) {
     cfg.service(get);
 }
 
-#[get("/data/")]
-async fn get(app_state: web::Data<AppState<'_>>) -> impl Responder {
-    println!("GET: /data/");
+#[get("/data/{id}")]
+async fn get(id: web::Path<String>, app_state: web::Data<AppState<'_>>) -> impl Responder {
+    println!("GET: /data/{}", id);
 
-    let states = app_state.database.state.all().await;
+    let data = app_state.database.data.by_id(&id).await;
 
-    match states {
+    match data {
         Err(_) => HttpResponse::NotFound().finish(),
-        Ok(states) => HttpResponse::Ok().json(states),
+        Ok(data) => HttpResponse::Ok().json(data),
     }
 }

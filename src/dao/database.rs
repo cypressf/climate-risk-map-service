@@ -1,4 +1,4 @@
-use super::{County, State};
+use super::{County, Data, State};
 use sqlx::mysql::MySqlRow;
 use sqlx::{FromRow, MySqlPool};
 use std::sync::Arc;
@@ -26,6 +26,7 @@ where
 pub struct Database<'c> {
     pub state: Arc<Table<'c, State>>,
     pub county: Arc<Table<'c, County>>,
+    pub data: Arc<Table<'c, Data>>,
 }
 
 impl Database<'_> {
@@ -36,6 +37,7 @@ impl Database<'_> {
         Database {
             state: Arc::from(Table::new(pool.clone())),
             county: Arc::from(Table::new(pool.clone())),
+            data: Arc::from(Table::new(pool.clone())),
         }
     }
 }

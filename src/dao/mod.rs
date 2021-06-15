@@ -1,6 +1,7 @@
-use super::model::{County, State};
+use super::model::{County, Data, State};
 
 mod county_dao;
+mod data_dao;
 pub mod database;
 mod state_dao;
 
