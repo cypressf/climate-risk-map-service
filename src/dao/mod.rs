@@ -1,6 +1,7 @@
-use super::model::{County, Data, Dataset, MapVisualization, State};
+use super::model::{County, Data, DataCategory, Dataset, MapVisualization, State};
 
 mod county_dao;
+mod data_category_dao;
 mod data_dao;
 pub mod database;
 mod dataset_dao;

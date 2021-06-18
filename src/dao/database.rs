@@ -1,4 +1,4 @@
-use super::{County, Data, Dataset, MapVisualization, State};
+use super::{County, Data, DataCategory, Dataset, MapVisualization, State};
 use sqlx::mysql::MySqlRow;
 use sqlx::{FromRow, MySqlPool};
 use std::sync::Arc;
@@ -29,6 +29,7 @@ pub struct Database<'c> {
     pub data: Arc<Table<'c, Data>>,
     pub dataset: Arc<Table<'c, Dataset>>,
     pub map_visualization: Arc<Table<'c, MapVisualization>>,
+    pub data_category: Arc<Table<'c, DataCategory>>,
 }
 
 impl Database<'_> {
@@ -42,6 +43,7 @@ impl Database<'_> {
             data: Arc::from(Table::new(pool.clone())),
             dataset: Arc::from(Table::new(pool.clone())),
             map_visualization: Arc::from(Table::new(pool.clone())),
+            data_category: Arc::from(Table::new(pool.clone())),
         }
     }
 }
