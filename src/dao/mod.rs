@@ -1,9 +1,10 @@
-use super::model::{County, Data, Dataset, State};
+use super::model::{County, Data, Dataset, MapVisualization, State};
 
 mod county_dao;
 mod data_dao;
 pub mod database;
 mod dataset_dao;
+mod map_visualization_dao;
 mod state_dao;
 
 pub type Database<'c> = database::Database<'c>;

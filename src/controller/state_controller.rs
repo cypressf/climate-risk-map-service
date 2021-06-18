@@ -18,9 +18,9 @@ async fn get(id: web::Path<String>, app_state: web::Data<AppState<'_>>) -> impl 
     }
 }
 
-#[get("/state/")]
+#[get("/state")]
 async fn get_all(app_state: web::Data<AppState<'_>>) -> impl Responder {
-    println!("GET: /state/");
+    println!("GET: /state");
 
     let states = app_state.database.state.all().await;
 
