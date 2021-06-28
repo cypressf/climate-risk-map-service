@@ -18,10 +18,14 @@ async fn get_all(app_state: web::Data<AppState<'_>>) -> impl Responder {
 }
 
 #[get("/map-visualization/{id}")]
-async fn get(id: web::Path<String>, app_state: web::Data<AppState<'_>>) -> impl Responder {
+async fn get(id: web::Path<i32>, app_state: web::Data<AppState<'_>>) -> impl Responder {
     println!("GET: /map-visualization/{}", id);
 
-    let counties = app_state.database.map_visualization.by_dataset(&id).await;
+    let counties = app_state
+        .database
+        .map_visualization
+        .by_dataset(id.into_inner())
+        .await;
 
     match counties {
         Err(_) => HttpResponse::NotFound().finish(),

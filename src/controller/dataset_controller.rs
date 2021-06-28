@@ -8,10 +8,10 @@ pub fn init(cfg: &mut web::ServiceConfig) {
 }
 
 #[get("/dataset/{id}")]
-async fn get(id: web::Path<String>, app_state: web::Data<AppState<'_>>) -> impl Responder {
+async fn get(id: web::Path<i32>, app_state: web::Data<AppState<'_>>) -> impl Responder {
     println!("GET: /dataset/{}", id);
 
-    let counties = app_state.database.dataset.by_id(&id).await;
+    let counties = app_state.database.dataset.by_id(id.into_inner()).await;
 
     match counties {
         Err(_) => HttpResponse::NotFound().finish(),
@@ -33,12 +33,16 @@ async fn get_all(app_state: web::Data<AppState<'_>>) -> impl Responder {
 
 #[get("/dataset/{id}/map-visualization")]
 async fn get_map_visualization(
-    id: web::Path<String>,
+    id: web::Path<i32>,
     app_state: web::Data<AppState<'_>>,
 ) -> impl Responder {
     println!("GET: /dataset/{}/map-visualization", id);
 
-    let map_visualization = app_state.database.map_visualization.by_dataset(&id).await;
+    let map_visualization = app_state
+        .database
+        .map_visualization
+        .by_dataset(id.into_inner())
+        .await;
 
     match map_visualization {
         Err(_) => HttpResponse::NotFound().finish(),

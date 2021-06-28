@@ -7,10 +7,10 @@ pub fn init(cfg: &mut web::ServiceConfig) {
 }
 
 #[get("/county/{id}")]
-async fn get(id: web::Path<String>, app_state: web::Data<AppState<'_>>) -> impl Responder {
+async fn get(id: web::Path<i16>, app_state: web::Data<AppState<'_>>) -> impl Responder {
     println!("GET: /county/{}", id);
 
-    let counties = app_state.database.county.by_id(&id).await;
+    let counties = app_state.database.county.by_id(id.into_inner()).await;
 
     match counties {
         Err(_) => HttpResponse::NotFound().finish(),

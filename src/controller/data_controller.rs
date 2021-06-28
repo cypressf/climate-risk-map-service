@@ -6,10 +6,10 @@ pub fn init(cfg: &mut web::ServiceConfig) {
 }
 
 #[get("/data/{id}")]
-async fn get(id: web::Path<String>, app_state: web::Data<AppState<'_>>) -> impl Responder {
+async fn get(id: web::Path<i32>, app_state: web::Data<AppState<'_>>) -> impl Responder {
     println!("GET: /data/{}", id);
 
-    let data = app_state.database.data.by_id(&id).await;
+    let data = app_state.database.data.by_id(id.into_inner()).await;
 
     match data {
         Err(_) => HttpResponse::NotFound().finish(),

@@ -2,12 +2,12 @@ use super::State;
 use super::Table;
 
 impl<'c> Table<'c, State> {
-    pub async fn by_id(&self, id: &str) -> Result<State, sqlx::Error> {
+    pub async fn by_id(&self, id: i16) -> Result<State, sqlx::Error> {
         sqlx::query_as(
             r#"
-            SELECT `id`, `name`
-            FROM `state`
-            WHERE `id` = ?"#,
+            SELECT "id", "name"
+            FROM "state"
+            WHERE "id" = $1"#,
         )
         .bind(id)
         .fetch_one(&*self.pool)

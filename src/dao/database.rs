@@ -1,21 +1,21 @@
 use super::{County, Data, DataCategory, Dataset, MapVisualization, State};
-use sqlx::mysql::MySqlRow;
-use sqlx::{FromRow, MySqlPool};
+use sqlx::postgres::PgRow;
+use sqlx::{FromRow, PgPool};
 use std::sync::Arc;
 
 pub struct Table<'c, T>
 where
-    T: FromRow<'c, MySqlRow>,
+    T: FromRow<'c, PgRow>,
 {
-    pub pool: Arc<MySqlPool>,
-    _from_row: fn(&'c MySqlRow) -> Result<T, sqlx::Error>,
+    pub pool: Arc<PgPool>,
+    _from_row: fn(&'c PgRow) -> Result<T, sqlx::Error>,
 }
 
 impl<'c, T> Table<'c, T>
 where
-    T: FromRow<'c, MySqlRow>,
+    T: FromRow<'c, PgRow>,
 {
-    fn new(pool: Arc<MySqlPool>) -> Self {
+    fn new(pool: Arc<PgPool>) -> Self {
         Table {
             pool,
             _from_row: T::from_row,
@@ -34,7 +34,7 @@ pub struct Database<'c> {
 
 impl Database<'_> {
     pub async fn new(sql_url: &str) -> Database<'_> {
-        let pool = MySqlPool::connect(sql_url).await.unwrap();
+        let pool = PgPool::connect(sql_url).await.unwrap();
         let pool = Arc::new(pool);
 
         Database {

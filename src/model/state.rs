@@ -3,6 +3,6 @@ use sqlx::FromRow;
 
 #[derive(FromRow, Deserialize, Serialize)]
 pub struct State {
-    pub id: u8,
+    pub id: i16,
     pub name: String,
 }

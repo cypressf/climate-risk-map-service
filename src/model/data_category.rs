@@ -3,6 +3,6 @@ use sqlx::FromRow;
 
 #[derive(FromRow, Deserialize, Serialize)]
 pub struct DataCategory {
-    pub id: u8,
+    pub id: i32,
     pub name: String,
 }
