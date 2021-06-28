@@ -1,0 +1,1 @@
+web: ./target/release/climate-risk-map
