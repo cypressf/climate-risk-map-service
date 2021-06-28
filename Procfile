@@ -1,1 +1,1 @@
-web: ./target/release/climate-risk-map
+web: ./target/release/climate_risk_map
